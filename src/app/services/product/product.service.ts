@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {SERVICES_URL} from '../../config/config';
+import {Product} from '../../models/product.model';
 
 
 @Injectable({
@@ -12,7 +13,12 @@ export class ProductService {
   loadProducts(from: number = 1): any {
 
     const url = SERVICES_URL + '/api/products?from=' + from;
-    console.log(url);
+
+    return this.http.get(url);
+  }
+
+  showProduct(id: number): any {
+    const url = SERVICES_URL + '/api/products/' + id;
     return this.http.get(url);
   }
 }

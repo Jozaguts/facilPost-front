@@ -1,6 +1,7 @@
 import {PagesComponent} from './pages.component';
 import {ProductsComponent} from './products/products.component';
 import {RouterModule} from '@angular/router';
+import {ProductComponent} from './products/product/product.component';
 
 const pagesRoutes = [
   {
@@ -8,6 +9,7 @@ const pagesRoutes = [
     component: PagesComponent,
     children: [
       {path: 'products', component: ProductsComponent},
+      {path: 'products/:id', component: ProductComponent},
       {path: '', redirectTo: '/products', pathMatch: 'full'},
     ]
   },

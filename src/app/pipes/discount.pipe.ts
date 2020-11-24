@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class DiscountPipe implements PipeTransform {
 
-  transform(value: string): unknown {
+  transform(value: any): unknown {
     return `${value}%`;
   }
 

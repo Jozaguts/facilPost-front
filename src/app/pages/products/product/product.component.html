@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-4">
+    <div class="card">
+      <img src="{{product.image}}" class="card-img-top" width="300" height="400">
+      <div class="card-body">
+        <h5 class="card-title">{{product.name}}</h5>
+        <p class="card-text">{{product.sale_price}}</p>
+        <p class="card-text"><small class="text-muted">{{ product.discount | discount}}</small></p>
+      </div>
+    </div>
+  </div>
+</div>
+

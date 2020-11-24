@@ -15,12 +15,15 @@ import {APP_ROUTES} from './app.routes';
 import { PagesModule } from './pages/pages.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
+import {PagesComponent} from './pages/pages.component';
+import {SharedModule} from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
+    PagesComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,8 @@ import {CommonModule} from '@angular/common';
     PagesModule,
     ReactiveFormsModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
