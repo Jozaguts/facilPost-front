@@ -8,8 +8,8 @@ import {SharedModule} from '../shared/shared.module';
 import {ServiceModule} from '../services/service.module';
 import { AdminComponent } from './admin/admin.component';
 import {CommonModule} from '@angular/common';
-import {PipesModule} from '../pipes/pipes.module';
 import { ProductComponent } from './products/product/product.component';
+import {PipesModule} from '../pipes/pipes.module';
 
 
 
@@ -25,7 +25,7 @@ import { ProductComponent } from './products/product/product.component';
     PAGES_ROUTES,
     ServiceModule,
     CommonModule,
-    PipesModule,
+    PipesModule
   ],
   exports: [
     ProductsComponent,

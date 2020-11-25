@@ -29,7 +29,6 @@ export class ProductsComponent implements OnInit {
   }
   changeFrom(from: number): void{
     const fromTo = this.page + from;
-
     if (fromTo >= this.registerTotal ){
       return;
     }

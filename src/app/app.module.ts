@@ -23,7 +23,7 @@ import {SharedModule} from './shared/shared.module';
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    PagesComponent
+    PagesComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +33,7 @@ import {SharedModule} from './shared/shared.module';
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
-    SharedModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

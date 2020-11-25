@@ -1,0 +1,61 @@
+<div class="row mt-5">
+  <div class="col-8 offset-2">
+    <div class="card-deck">
+      <div class="card">
+        <img src="{{product.image | routeimage}}" class="card-img-top" width="300" height="400">
+        <div class="card-body">
+          <h5 class="card-title">{{product.name}}</h5>
+          <p class="card-text">{{product.sale_price}}</p>
+          <p class="card-text"><small class="text-muted">{{ product.discount +'%'}}</small></p>
+        </div>
+      </div>
+      <div class="card">
+<!--        <img src="http://localhost:8000/storage/images/elecciones_1606259114.png" alt="">-->
+          <h4 class="mb-3">Billing address</h4>
+          <form ngNativeValidate [formGroup]="updateForm" (ngSubmit)="update()" class="needs-validation" >
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="name">Product Name</label>
+                <input type="text" formControlName="name"  [(ngModel)]="product.name" class="form-control"  id="name" name="name"  placeholder="" required>
+                <div class="invalid-feedback">
+                  Valid first name is required.
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="sale_price">Sale Price</label>
+                <input formControlName="sale_price"  [(ngModel)]="product.sale_price"  type="number" class="form-control" id="sale_price" name="sale_price" placeholder=""   required>
+                <div class="invalid-feedback">
+                  Valid last name is required.
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="discount">Discount <span class="text-muted">(Optional)</span></label>
+              <input  formControlName="discount"  [(ngModel)]="product.discount"  type="number"  class="form-control" id="discount"  name="discount" placeholder="">
+              <div class="invalid-feedback">
+                Please enter a valid discount .
+              </div>
+            </div>
+            <div class="mb-3">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                </div>
+                <div class="custom-file">
+                  <input (change)="previewImage($event)"  formControlName="image" accept=".png, .jpg, .jpeg"  type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                  <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                  <input type="hidden"  formControlName="id"  [(ngModel)]="product.id">
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Update</button>
+          </form>
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+</div>

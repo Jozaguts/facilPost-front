@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ProductService, UserService} from '../../services/service.index';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -9,7 +10,7 @@ import {ProductService, UserService} from '../../services/service.index';
 export class AdminComponent implements OnInit {
 
 
-  constructor(public _userService: UserService, public _productService: ProductService) { }
+  constructor(public _userService: UserService, public _productService: ProductService, public router: Router) { }
   page = 1;
   products: any[] = [];
   registerTotal = 0;
@@ -23,25 +24,6 @@ export class AdminComponent implements OnInit {
         this.registerTotal = resp.meta.total;
         this.products = resp.data;
       });
-  }
-  changeFrom(from: number): void{
-    const fromTo = this.page + from;
-
-    if (fromTo >= this.registerTotal ){
-      return;
-    }
-
-    if (fromTo < 0 ) {
-      return;
-    }
-    this.page += from;
-    this.loadProducts();
-  }
-  update(id: string): void{
-
-  }
-  delete(id: string): void{
-
   }
 
 }
