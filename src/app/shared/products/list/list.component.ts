@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ProductService} from '../../../services/product/product.service';
 import {Router} from '@angular/router';
-
+import swal from 'sweetalert';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -45,7 +45,8 @@ export class ListComponent implements OnInit {
   }
   delete(id: string): void{
     this._productService.deleteProduct(id).subscribe((resp: any) => {
-      console.log(resp);
+      swal(' Success!', 'Product was deleted successfully!', 'success');
+      this.loadProducts();
     });
   }
 

@@ -3,6 +3,7 @@ import {Product} from '../../../models/product.model';
 import {ActivatedRoute} from '@angular/router';
 import {ProductService} from '../../../services/service.index';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-product',
@@ -24,7 +25,7 @@ export class ProductComponent implements OnInit {
       name: new FormControl(null, Validators.required),
       sale_price: new FormControl(null, [Validators.required]),
       discount: new FormControl(null, Validators.required),
-      image: new FormControl(null, Validators.required)
+      image: new FormControl(null, Validators.nullValidator)
     });
     this.loadProduct();
   }
@@ -53,7 +54,7 @@ export class ProductComponent implements OnInit {
     formData.append('sale_price', this.updateForm.value.sale_price);
     formData.append('discount', this.updateForm.value.discount);
     this._productService.updateProduct(this.updateForm.value.id, formData).subscribe( (resp: any) => {
-      console.log(resp);
+      swal(' Success!', 'Product was updated successfully!', 'success');
     });
   }
   previewImage(event: any): void {
