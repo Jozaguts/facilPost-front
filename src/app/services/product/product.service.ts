@@ -29,4 +29,12 @@ export class ProductService {
     });
     return this.http.post(url, data, { headers});
   }
+  deleteProduct(id: any): any{
+    const url = SERVICES_URL + '/api/products/' + id;
+    const auth_token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${auth_token}`
+    });
+    return this.http.delete(url, {headers});
+  }
 }

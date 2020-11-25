@@ -44,7 +44,9 @@ export class ListComponent implements OnInit {
 
   }
   delete(id: string): void{
-
+    this._productService.deleteProduct(id).subscribe((resp: any) => {
+      console.log(resp);
+    });
   }
 
 }
