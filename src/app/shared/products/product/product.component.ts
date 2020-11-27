@@ -12,16 +12,17 @@ import swal from 'sweetalert';
 })
 export class ProductComponent implements OnInit {
 
-  updateForm!: FormGroup;
-  image: any;
+  createOrUpdateForm: FormGroup;
+  image: string = '';
 
   // @ts-ignore
   product: Product;
+  method: string = '';
   constructor(public route: ActivatedRoute, public _productService: ProductService) { }
 
   ngOnInit(): void {
-    this.updateForm = new FormGroup({
-      id: new FormControl(null, Validators.required),
+    this.createOrUpdateForm = new FormGroup({
+      id: new FormControl(undefined, ),
       name: new FormControl(null, Validators.required),
       sale_price: new FormControl(null, [Validators.required]),
       discount: new FormControl(null, Validators.required),
@@ -30,32 +31,39 @@ export class ProductComponent implements OnInit {
     this.loadProduct();
   }
   loadProduct(): void {
-    const product = JSON.parse( localStorage.getItem('product') as string );
-    if (product){
+    if ( this.route.snapshot.routeConfig.path !== 'products/create'){
+      this.method = 'Update';
+      const product = JSON.parse( localStorage.getItem('product') as string );
       this.product = product;
-    }else{
       const id = this.route.snapshot.params.id;
       this._productService.showProduct(id).subscribe( (resp: any ) => {
-        this.product = resp.data;
-        localStorage.setItem('product', JSON.stringify(this.product) as string);
+          this.product = resp.data;
+          localStorage.setItem('product', JSON.stringify(this.product) as string);
       });
-
+    }else{
+      this.method = 'Create';
+      this.product = new Product('', 0, 0, '');
     }
   }
-  update(): void{
-
-    if (this.updateForm.invalid){
+  createOrUpdate(): void{
+    if (this.createOrUpdateForm.invalid){
       return;
     }
     const formData = new FormData();
     formData.append('image', this.image);
-    formData.append('id', this.updateForm.value.id);
-    formData.append('name', this.updateForm.value.name);
-    formData.append('sale_price', this.updateForm.value.sale_price);
-    formData.append('discount', this.updateForm.value.discount);
-    this._productService.updateProduct(this.updateForm.value.id, formData).subscribe( (resp: any) => {
-      swal(' Success!', 'Product was updated successfully!', 'success');
-    });
+    formData.append('name', this.createOrUpdateForm.value.name);
+    formData.append('sale_price', this.createOrUpdateForm.value.sale_price);
+    formData.append('discount', this.createOrUpdateForm.value.discount);
+    if (this.createOrUpdateForm.value.id){
+      formData.append('id', this.createOrUpdateForm.value.id);
+      this._productService.updateProduct(this.createOrUpdateForm.value.id, formData).subscribe( (resp: any) => {
+        swal(' Success!', 'Product was Updated successfully!', 'success');
+      });
+    }else {
+      this._productService.createProduct(formData).subscribe( (resp: any) => {
+        swal(' Success!', 'Product was Created successfully!', 'success');
+      });
+    }
   }
   previewImage(event: any): void {
     if (event.target.files) {

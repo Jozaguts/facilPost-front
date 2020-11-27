@@ -39,8 +39,12 @@ export class ProductService {
     });
     return this.http.delete(url, {headers});
   }
-  createProduct(user: User): Observable<object> {
+  createProduct(user: FormData): Observable<object> {
     const url = `${SERVICES_URL}/api/products`;
-    return this.http.post(url, user);
+    const auth_token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${auth_token}`
+    });
+    return this.http.post(url, user, {headers});
   }
 }

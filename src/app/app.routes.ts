@@ -18,6 +18,7 @@ const appRoutes: Routes = [
   {path: 'admin', component: AdminComponent, canActivate: [LoginGuardGuard],
   children: [
     {path: '', component: ListComponent},
+    {path: 'products/create', component: ProductComponent},
     {path: 'product/:id', component: ProductComponent}
   ]},
   {path: '', component: PagesComponent, loadChildren: './pages/pages.module#PagesModule'},
@@ -26,3 +27,4 @@ const appRoutes: Routes = [
 ];
 
 export const APP_ROUTES = RouterModule.forRoot(appRoutes, { useHash: true });
+
