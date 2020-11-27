@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {SERVICES_URL} from '../../config/config';
 import {Product} from '../../models/product.model';
+import {Observable} from 'rxjs';
+import {User} from '../../models/user.model';
 
 
 @Injectable({
@@ -36,5 +38,9 @@ export class ProductService {
       Authorization: `Bearer ${auth_token}`
     });
     return this.http.delete(url, {headers});
+  }
+  createProduct(user: User): Observable<object> {
+    const url = `${SERVICES_URL}/api/products`;
+    return this.http.post(url, user);
   }
 }

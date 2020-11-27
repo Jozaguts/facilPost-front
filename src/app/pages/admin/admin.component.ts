@@ -25,5 +25,8 @@ export class AdminComponent implements OnInit {
         this.products = resp.data;
       });
   }
+  createProduct(): void {
+
+  }
 
 }

@@ -6,7 +6,7 @@ import {User} from '../../models/user.model';
 import { map } from 'rxjs/operators';
 
 
-// import swal from 'sweetalert';
+import swal from 'sweetalert';
 import {Router} from '@angular/router';
 
 @Injectable({
@@ -14,28 +14,25 @@ import {Router} from '@angular/router';
 })
 export class UserService {
 
-  // @ts-ignore
-  user: User;
-  // @ts-ignore
-  token: string;
+
+  user: any = User;
+
+  token: string = '';
 
   constructor(public http: HttpClient, public router: Router) {
     this.loadStorage();
   }
   loadStorage(): void{
     if ( localStorage.getItem('token')) {
-      // @ts-ignore
-      this.token = localStorage.getItem('token');
-      // @ts-ignore
-      this.user = JSON.parse( localStorage.getItem('user') );
+
+      this.token = localStorage.getItem('token') || '';
+      this.user = JSON.parse( localStorage.getItem('user') || '');
     } else {
       this.token = '';
-      // @ts-ignore
       this.user = null;
     }
   }
   isLogged(): boolean {
-    // @ts-ignore
     return  this.token.length > 5;
   }
   saveIntoStorage( token: string, user: User ): void {
@@ -51,8 +48,8 @@ export class UserService {
     const url = SERVICES_URL + '/api/users';
     return this.http.post(url, user ).pipe(
       map((resp: any) => {
-        // @ts-ignore
-        // swal('Usuario Creado', user.email, 'success');
+
+        swal('Usuario Creado', user.email, 'success');
         return resp.user;
       })
     );

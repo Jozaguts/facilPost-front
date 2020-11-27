@@ -13,7 +13,6 @@ export class LoginGuardGuard implements CanActivate {
   canActivate(): boolean{
 
     if (this._userService.isLogged()){
-      console.log('pasp');
       return true;
     }else{
       console.log('bloquedo');
